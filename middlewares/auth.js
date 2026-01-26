@@ -18,3 +18,14 @@ export function verifyAuth(req,res,next){
         res.json({message: "Invalid missing"})
     }
 }
+
+export function orgScope(req,res,next){
+    req.orgId = req.user.org_id
+    next()
+}
+
+export function verifyOwner(req,res,next){
+    if(req.user.role != "OWNER") return res.status(403).json({message: "Access Forbidden, OWNER access required"})
+    
+    next()
+}
