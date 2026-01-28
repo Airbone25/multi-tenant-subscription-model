@@ -1,9 +1,10 @@
 import express from 'express'
 import { verifyApiKey } from '../middlewares/apiKey'
+import { rateLimiter } from '../middlewares/rateLimiter'
 
 const router = express.Router()
 
-router.get('/',verifyApiKey,(req,res)=>{
+router.get('/',verifyApiKey,rateLimiter,(req,res)=>{
     res.send('Product Api')
 })
 
